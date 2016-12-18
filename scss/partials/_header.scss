@@ -1,0 +1,39 @@
+@media#{$mobile}{
+  .navigation{
+    float: left;
+    clear: both;
+    height: 50px;
+    width: 50px;
+
+  }
+
+  .header_nav{
+    display: none;
+
+
+  }
+
+  header i{
+    cursor: pointer;
+    &.fa-bars {
+      font-size: (5em / 3);
+      line-height: (3em / 4);
+      vertical-align: -15%;
+    }
+  }
+
+  .header_form{
+    display: inline-block;
+    float: right;
+  }
+
+}
+
+
+@media#{$desktop}{
+  header i{
+    display: none;
+  }
+
+
+}

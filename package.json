@@ -1,0 +1,19 @@
+{
+  "name": "map-project",
+  "version": "1.0.0",
+  "description": "My final porftolio project is an interactive map.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.17.1",
+    "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*"
+  }
+}
