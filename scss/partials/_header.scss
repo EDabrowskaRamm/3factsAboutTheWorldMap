@@ -1,16 +1,20 @@
+header{
+  height: 100px;
+}
+.navigation{
+  float: left;
+  clear: both;
+  height: 50px;
+  width: 50px;
+}
+.header_form{
+  display: inline-block;
+  float: right;
+}
+
 @media#{$mobile}{
-  .navigation{
-    float: left;
-    clear: both;
-    height: 50px;
-    width: 50px;
-
-  }
-
   .header_nav{
     display: none;
-
-
   }
 
   header i{
@@ -22,18 +26,34 @@
     }
   }
 
-  .header_form{
-    display: inline-block;
-    float: right;
-  }
-
 }
 
 
 @media#{$desktop}{
-  header i{
-    display: none;
+  .main_width{
+    width: 1100px;
+    margin: 0 auto;
   }
+  .navigation{
+    width: 450px;
+    i{
+      display: none;
+    }
+  }
+  .header_nav{
+    ul{
+      list-style-type: none;
+      li{
+        display: inline-block;
+        margin: 0 20px;
+        a{
+          text-decoration: none;
+          color: black;
+        }
+      }
+    }
+  }
+
 
 
 }
