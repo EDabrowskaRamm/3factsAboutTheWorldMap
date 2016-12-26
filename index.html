@@ -22,10 +22,9 @@
         </nav>
       </div>
       <div class="header_form">
-        <form>
+        <form method="get" action="#">
           <label>
-            <input type="search">
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <input type="search" placeholder="Search for country">
           </label>
           <input type="submit">
         </form>
@@ -35,22 +34,24 @@
   <article class="article_map">
     <section class="main_width">
       <div class="map">
-        <div><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
-        <div><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
-        <div><i class="fa fa-home" aria-hidden="true"></i></div>
-        <div><img class="pic_map" src="images/worldHigh.svg"/></div>
+        <div>
+          <i class="fa fa-plus-circle" aria-hidden="true"></i>
+          <i class="fa fa-minus-circle" aria-hidden="true"></i>
+          <i class="fa fa-home" aria-hidden="true"></i>
+        </div>
+        <img class="pic_map" src="images/worldHigh.svg"/>
       </div>
     </section>
   </article>
-  <article>
+  <article class="country_info">
     <section class="main_width">
-      <div class="country_info">
+      <div>
       </div>
     </section>
   </article>
-  <article>
+  <article class="countryLookUp">
     <section class="main_width">
-      <form>
+      <form method="post" action="#">
         <label>
           <select name="continent_type">
             <option value="0">Continent</option>
