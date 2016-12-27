@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync').create();
+var $ = require('jquery');
 
 gulp.task('scss_task', function(){
   return gulp.src('scss/*.scss')
@@ -17,6 +18,12 @@ gulp.task('jsTask', function(){
   return gulp.src('js/*.js')
   .pipe(jshint())
   .pipe(jshint.reporter('default'))
+});
+
+gulp.task('libTask', function(){
+  return gulp.src('lib/*.js')
+//  .pipe(jshint())
+//  .pipe(gulp.dest(''))
 });
 
 gulp.task('synchro', ['scss_task'], function(){

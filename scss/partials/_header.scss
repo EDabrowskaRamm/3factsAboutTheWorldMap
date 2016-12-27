@@ -39,6 +39,19 @@ header{
     }
   }
 }
+.header_nav{
+  ul{
+    list-style-type: none;
+    li{
+      display: inline-block;
+      margin: 0 20px;
+      a{
+        text-decoration: none;
+        color: $navColor;
+      }
+    }
+  }
+}
 
 @media#{$mobile}{
   .header_nav{
@@ -46,6 +59,7 @@ header{
   }
   .navigation i{
     cursor: pointer;
+    width: 450px;
     &.fa-bars {
       font-size: (7em / 3);
       line-height: (3em / 4);
@@ -54,7 +68,9 @@ header{
       margin-top: 10px;
     }
   }
+  .mob_nav{
 
+  }
 
 
 
