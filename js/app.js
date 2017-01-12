@@ -36,7 +36,7 @@ $(function(){
 //clicked country gets bigger
 
 
-
+//ajax
 
 
 

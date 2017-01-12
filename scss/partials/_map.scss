@@ -1,6 +1,25 @@
 .article_map{
   background-color: $seeColor;
 }
+.map_country_data{
+  //display: hidden;
+  width: 180px;
+  height: 200px;
+  background-color: $navColor;
+  border-radius: 10%;
+  opacity: .6;
+  overflow: hidden;
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  ul{
+    list-style-type: none;
+    li{
+      display: inline-block;
+      margin: 0;
+    }
+  }
+}
 
 @media#{$desktop}{
   .main_width{
@@ -10,6 +29,9 @@
   .pic_map{
     width: 100%;
     height: 700px;
+  }
+  .map{
+    position: relative;
   }
   .map i{
     &.fa {
