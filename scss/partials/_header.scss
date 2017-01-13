@@ -1,7 +1,7 @@
 header{
   height: 100px;
   width: 100%;
-  background-color: $backgroundColor;
+  background-color: $headerBackgroundColor;
   //dlaczego gubi sie background color ponizej 1100px???
 }
 .navigation{
@@ -31,8 +31,8 @@ header{
       left: 175px;
       top: 3px;
       padding-left: 5px;
-      border-left: 1px solid $backgroundColor;
-      color: $backgroundColor;
+      border-left: 1px solid $headerBackgroundColor;
+      color: $headerBackgroundColor;
     }
     input[type="submit"]{
       display: none;
