@@ -1,6 +1,11 @@
 .article_map{
   background-color: $seeColor;
 }
+#chartdiv{
+  width: 100vw;
+  height: 100vh;
+}
+
 .map_country_data{
   display: none;
   width: 180px;
