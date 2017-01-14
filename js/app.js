@@ -19,11 +19,11 @@ $(function(){
       lands[i].addEventListener('mouseenter', function(){
         this.style.fill = '#EF5159';
       })
-
+/*
       lands[i].addEventListener('click', function(){
         console.log('clicked' + i);
         this.style.scale(2, 2);
-      })
+      }) */
     }
 
     for(var i = 0, len = lands.length; i < len; i++){
@@ -33,16 +33,14 @@ $(function(){
     }
   };
 
-//clicked country gets bigger
-
 
 //ajax
   var $countryFactsContainer = $('.article_map');
+  var $countryDataDiv = $countryFactsContainer.find('.map_country_data');
   var $countryFactsList = $countryFactsContainer.find('.map_data_list');
-  var countryCapitUrl = 'https://restcountries.eu/rest/v1/capital';
+  var countryUrl = 'https://restcountries.eu/rest/v1/alpha/';
 //get country data
   function getData(){
-    var $land = $(SVGcontainer).find('.land');
     var $listItem;
     var $countryName;
     var $countryCapit;
@@ -53,33 +51,65 @@ $(function(){
     var countryCapit;
     var countryLang;
     var countryCurr;
-//id pobrać z path
-    $.ajax({
-      url: countryCapitUrl,
-      type: 'get',
-      dataType: 'json'
-    }).done(function(response){
-      for(var i = 0, len = response.length; i < len; i++){
-        listItemHTML = '<li class="country_full_info">' +
-          '<h3 class="country_name">' + response[i].name + '</h3>' +
-          '<p class="country_capit">' + response[i].capital + '</p>' +
-          '<p class="country_lang">' + response[i].languages + '</p>' +
-          '<p clss="country_curr">' + response[i].currencies + '</p>' +
-          '</li>';
 
-        $listItem = $(listItemHTML);
-        $countryFactsList.append($listItem);
-      }
-    }).fail(function(error){
-        console.log(error);
+    $('.land').click(function(){
+      var countryCode = $(this).attr('id');
+      var thisCountry = this;
+      console.log(countryCode);
+      thisCountry.style.fill = '#007B72';
+      $countryDataDiv.css('display', 'block');
+      $countryFactsList.empty();
+
+
+      $.ajax({
+        url: countryUrl + countryCode,
+        type: 'get',
+        dataType: 'json'
+      }).done(function(response){
+        console.log(response);
+
+            listItemHTML = '<li class="country_full_info">' +
+              '<h3 class="country_name">' + response.name + '</h3>' +
+              '<p class="country_capit">' + response.capital + '</p>' +
+              '<p class="country_lang">' + response.languages + '</p>' +
+              '<p clss="country_curr">' + response.currencies + '</p>' +
+              '</li>';
+
+            $listItem = $(listItemHTML);
+            $countryFactsList.append($listItem);
+
+      }).fail(function(error){
+          console.log(error);
+      });
+
+//country is bigger after click
+      var s = Snap('.map');
+      var singleCountry = s.select('#' + countryCode);
+      var bbox = singleCountry.getBBox();
+      console.log(bbox);
+
+      singleCountry.animate({
+        transform: 's2,2,' + bbox.cx + ',' + bbox.cy
+      }, 3000);
+
+
+
     });
-console.log('get data');
+
+
+
+//counry info hide
+    $('.land').focusout(function(){
+      $countryDataDiv.css('display', 'none');
+    });
+
   }
 
 getData();
 
-//czy moga byc 2 ajaxt w 1 funkcji
-//trzeba włozyc wyswietlanie danych do funkcji pobierania
-//trzea zrobic each po landach zeby zrobic event click i wyswietlic dane
 
 });
+
+//tooltip na hover
+//zrobic na if jesli kolor czerw to jak mouseout to zmien na bialy.
+//jesli kolor zielony to zostaw i wylacz kiedy inny kraj bedzie klikniety
