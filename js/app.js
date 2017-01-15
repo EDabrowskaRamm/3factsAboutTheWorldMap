@@ -12,7 +12,8 @@ $(function(){
 //svg libary
   var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
   var currentObject;
-  var map = AmCharts.makeChart( "chartdiv", {
+  var map;
+  map = AmCharts.makeChart( "chartdiv", {
     "type": "map",
 
     "imagesSettings": {
@@ -31,11 +32,11 @@ $(function(){
       "unlistedAreasColor": "#15A892",
       "selectable": true,
       "autoZoom": true,
-      'color': '#CCCCCC',
-      'rollOverColor': '#EF5159',
-      'rollOverOutlineColor': '#EF5159',
-      'selectedColor': '#007B72',
-      'selectedOutlineColor': '#007B72'
+      "color": '#CCCCCC',
+      "rollOverColor": '#EF5159',
+      "rollOverOutlineColor": '#EF5159',
+      "selectedColor": '#007B72',
+      "selectedOutlineColor": '#007B72'
     },
 
     "dataProvider": {
@@ -44,61 +45,63 @@ $(function(){
     },
 
     "listeners": [ {
+//get data event
       "event": "clickMapObject",
-      "method": function( event ) {
-        var countryMapID = event.mapObject.id;
-        var countryMapName = event.mapObject.enTitle;
-        console.log(event.mapObject);
+      "method":  getData
+    }, {
+//hide info event
+      "event": "homeButtonClicked",
+      "method": function(event){
 
-        // check if the map is already at traget zoomLevel and go to url if it is
-        // if ( 'undefined' != typeof currentObject && event.mapObject.id == currentObject.id ) {
-        //   window.location.href = event.mapObject.myUrl;
-        // }
-        // currentObject = event.mapObject;
+        var $countryDataDiv = $('.map_country_data');
+        $countryDataDiv.css('display', 'none');
       }
-    } ]
-
-
-
+    }
+   ]
 
   } );
+
 
   // function clickObject( id ) {
   //   map.clickMapObject( map.getObjectById( id ) );
   // }
 
-//ajax
-   var $countryFactsContainer = $('.article_map');
-   var $countryDataDiv = $countryFactsContainer.find('.map_country_data');
-   var $countryFactsList = $countryFactsContainer.find('.map_data_list');
-   var countryUrl = 'https://restcountries.eu/rest/v1/alpha/';
+
+  var countryMapID;
+  var countryMapName;
+
 //get country data
-   function getData(){
+   function getData(event){
+
+//map object var
+     countryMapID = event.mapObject.id;
+     countryMapName = event.mapObject.enTitle;
+//html map containers
+     var $countryFactsContainer = $('.article_map');
+     var $countryDataDiv = $countryFactsContainer.find('.map_country_data');
+     var $countryFactsList = $countryFactsContainer.find('.map_data_list');
+     var countryUrl = 'https://restcountries.eu/rest/v1/alpha/';
+//vars to be used jQuery
      var $listItem;
      var $countryName;
-     var $countryCapit;
-     var $countryLang;
-     var $countryCurr;
+//vars to be used js
      var listItemHTML;
      var countryName;
-     var countryCapit;
-     var countryLang;
-     var countryCurr;
 
-     $('.land').click(function(){
-       var countryCode = $(this).attr('id');
-       var thisCountry = this;
-       console.log(countryCode);
+//vars that was used
+     var countryCode = $(this).attr('id');
+     var thisCountry = this;
 
-       $countryDataDiv.css('display', 'block');
-       $countryFactsList.empty();
+     $countryDataDiv.css('display', 'block');
 
+//ajax
        $.ajax({
-         url: countryUrl + countryCode,
+         url: countryUrl + countryMapID,
          type: 'get',
          dataType: 'json'
        }).done(function(response){
-         console.log(response);
+
+          $countryFactsList.empty();
 
            listItemHTML = '<li class="country_full_info">' +
                '<h3 class="country_name">' + response.name + '</h3>' +
@@ -113,29 +116,72 @@ $(function(){
        }).fail(function(error){
            console.log(error);
        });
-     });
+
    }
-  getData();
 
-//get data from input search
 
-  function getSearchData(){
-    var $searchContainer = $('.header_form');
-    var $searchForm = $searchContainer.find('form');
-    var $searchInput = $searchForm.find('input[type="search"]');
-    var $submitInput = $searchForm.find('input[type="submit"]');
-    console.log($submitInput);
+   function searchCountry(map) {
 
-    $searchForm.on('submit', function(e) {
-      e.preventDefault();
-      searchVal = $searchInput.val();
+   //    console.log(map.dataProvider.areas[0].id);
+    //  countryMapID = event.mapObject.id;
+    //  countryMapName = event.mapObject.enTitle;
 
-      console.log(searchVal);
-      //potrzebuje porownac name. musze sie dostac do danych z mapy
-    });
-  }
+     var $searchContainer = $('.header_form');
+     var $searchForm = $searchContainer.find('form');
+     var $searchInput = $searchForm.find('input[type="search"]');
+     var $submitInput = $searchForm.find('input[type="submit"]');
+     var countryUrl = 'https://restcountries.eu/rest/v1/alpha/';
+     var searchVal;
 
-getSearchData();
+     $searchForm.on('submit', function(e) {
+
+       e.preventDefault();
+       $(searchVal).empty();
+       searchVal = $searchInput.val();
+//             console.log(searchVal);
+
+       var landsArray = map.dataProvider.areas;
+
+       for(var i = 0, len = landsArray.length; i < len; i++) {
+
+         var countryDataID = landsArray[i].id;
+         var countryDataName = landsArray[i].enTitle;
+
+         $.ajax({
+           url: countryUrl + countryDataID,
+           type: 'get',
+           dataType: 'json'
+         }).done(function(response){
+           var countryName = response.name;
+           var countryID = response.alpha2Code;
+
+           if(searchVal == countryName){
+             console.log(countryName);
+             console.log(countryID);
+             //zoom and mark country
+             //getData();
+             map.zoomToSelectedObject();
+           }
+
+         }).fail(function(error){
+           console.log(error);
+         });
+
+       }
+
+     });
+
+
+   }
+searchCountry(map);
+//searchCountry(event);
+
+$('#click').click(function() {
+
+  console.log(map.dataProvider.areas[0]);
+  //map.zoomToSelectedObject(map.dataProvider.areas[0]);
+  map.zoomIn();
+})
 
 
 });
