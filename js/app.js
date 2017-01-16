@@ -105,9 +105,9 @@ $(function(){
 
            listItemHTML = '<li class="country_full_info">' +
                '<h3 class="country_name">' + response.name + '</h3>' +
-               '<p class="country_capit">' + response.capital + '</p>' +
-               '<p class="country_lang">' + response.languages + '</p>' +
-               '<p clss="country_curr">' + response.currencies + '</p>' +
+               '<p class="country_capit">Capital: ' + response.capital + '</p>' +
+               '<p class="country_lang">Language: ' + response.languages + '</p>' +
+               '<p clss="country_curr">Currency: ' + response.currencies + '</p>' +
                '</li>';
 
            $listItem = $(listItemHTML);

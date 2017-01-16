@@ -1,0 +1,25 @@
+footer{
+  width: 100%;
+  background-color: $headerBackgroundColor;
+  .foot_title{
+    float: left;
+    clear: both;
+  }
+  .foot_copy{
+    float: right;
+  }
+}
+
+@media#{$mobile}{
+  footer{
+    height: 120px;
+    .foot_title{
+      padding-left: 10px;
+    }
+    .foot_copy{
+      padding-right: 10px;
+    }
+  }
+
+
+}

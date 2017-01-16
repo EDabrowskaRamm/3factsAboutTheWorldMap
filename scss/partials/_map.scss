@@ -17,6 +17,8 @@
   height: 200px;
   ul{
     list-style-type: none;
+    padding-left: 10px;
+    margin-top: 0;
     li{
       display: inline-block;
       margin: 0;
@@ -25,11 +27,17 @@
 }
 
 @media#{$mobile}{
+  .main_width{
+    margin: 0 auto;
+  }
+  .article_map{
+    height: 600px;
+  }
   .map{
-    padding-left: 20px;
+    margin-left: 20px;
     padding-top: 3px;
     #chartdiv{
-      width: 90vw;
+      width: 85vw;
       height: 85vh;
     }
     .map_country_data{

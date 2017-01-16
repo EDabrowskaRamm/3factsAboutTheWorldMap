@@ -1,5 +1,4 @@
 header{
-  height: 100px;
   width: 100%;
   background-color: $headerBackgroundColor;
   //dlaczego gubi sie background color ponizej 1100px???
@@ -18,18 +17,16 @@ header{
   float: right;
   form{
     position: relative;
-//    margin-top: 30px;
     margin-right: 30px;
-    padding: 0;
     display: block;
     &::after{
       content: '\f002';
       font-family: 'FontAwesome';
       position: absolute;
       display: block;
-      right: 5%;
+      right: 0;
       top: 3px;
-      padding-left: 5%;
+      padding-left: 10px;
       border-left: 1px solid $headerBackgroundColor;
       color: $headerBackgroundColor;
       height: 30px;
@@ -52,8 +49,12 @@ header{
   header{
     height: 150px;
     .header_form{
-      margin-top: 20%;
+      margin-top: 50px;
       width: 80%;
+      input[type="search"]{
+        width: 100%;
+        padding-left: 10px;
+      }
     }
   }
   .navigation{
@@ -74,7 +75,9 @@ header{
     width: 450px;
     margin-top: 10px;
   }
-
+  header{
+    height: 100px;
+  }
 
 
 
