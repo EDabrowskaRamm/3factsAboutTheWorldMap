@@ -2,18 +2,10 @@
   background-color: $seeColor;
   width: 100%;
   height: 700px;
-  margin: 0;
-}
-#chartdiv{
-  width: 85vw;
-  height: 85vh;
-  padding-top: 3px;
 }
 
 .map_country_data{
   display: none;
-  width: 180px;
-  height: 200px;
   background-color: $navColor;
   border-radius: 10%;
   opacity: .6;
@@ -21,6 +13,8 @@
   position: absolute;
   top: 100px;
   right: 20px;
+  width: 180px;
+  height: 200px;
   ul{
     list-style-type: none;
     li{
@@ -30,28 +24,38 @@
   }
 }
 
+@media#{$mobile}{
+  .map{
+    padding-left: 20px;
+    padding-top: 3px;
+    #chartdiv{
+      width: 90vw;
+      height: 85vh;
+    }
+    .map_country_data{
+      top: 180px;
+      right: 30px;
+      width: 180px;
+      height: 200px;
+    }
+  }
+}
+
+
+
 @media#{$desktop}{
   .main_width{
     width: 1100px;
     margin: 0 auto;
   }
-  .pic_map{
-    width: 100%;
-    height: 700px;
-  }
   .map{
     position: relative;
+    padding-top: 3px;
     #chartdiv{
-
+      width: 75vw;
+      height: 75vh;
     }
   }
 
 
-}
-
-@media#{$mobile}{
-  .pic_map{
-    width: 100%;
-    height: 500px;
-  }
 }
