@@ -23,3 +23,16 @@ footer{
 
 
 }
+
+
+@media#{$tablet}{
+  footer{
+    height: 60px;
+    .foot_title{
+      padding-left: 20px;
+    }
+    .foot_copy{
+      padding-right: 20px;
+    }
+  }
+}

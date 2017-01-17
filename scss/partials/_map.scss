@@ -1,7 +1,7 @@
 .article_map{
   background-color: $seeColor;
   width: 100%;
-  height: 700px;
+  height: 100vh;
 }
 
 .map_country_data{
@@ -11,8 +11,6 @@
   opacity: .6;
   overflow: hidden;
   position: absolute;
-  top: 100px;
-  right: 20px;
   width: 180px;
   height: 200px;
   ul{
@@ -30,9 +28,6 @@
   .main_width{
     margin: 0 auto;
   }
-  .article_map{
-    height: 600px;
-  }
   .map{
     margin-left: 20px;
     padding-top: 3px;
@@ -43,12 +38,28 @@
     .map_country_data{
       top: 180px;
       right: 30px;
-      width: 180px;
-      height: 200px;
     }
   }
 }
 
+@media#{$tablet}{
+  .main_width{
+    margin: 0 auto;
+  }
+  .map{
+    margin-left: 20px;
+    padding-top: 3px;
+    #chartdiv{
+      width: 95vw;
+      height: 95vh;
+    }
+    .map_country_data{
+      top: 180px;
+      right: 30px;
+    }
+  }
+
+}
 
 
 @media#{$desktop}{
@@ -60,8 +71,13 @@
     position: relative;
     padding-top: 3px;
     #chartdiv{
-      width: 75vw;
-      height: 75vh;
+      margin-top: 20px;
+      width: 65vw;
+      height: 85vh;
+    }
+    .map_country_data{
+      top: 50px;
+      right: 50px;
     }
   }
 
