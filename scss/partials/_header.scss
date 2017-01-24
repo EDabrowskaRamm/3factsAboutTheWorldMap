@@ -15,7 +15,7 @@ header{
   float: right;
   form{
     position: relative;
-    margin-right: 30px;
+    margin-right: 45px;
     display: block;
     input[type="submit"]{
       display: none;
@@ -27,13 +27,13 @@ header{
     }
     .fa-search{
       position: absolute;
-      background-color: white;
+      background-color: $seeColor;
       color: $headerBackgroundColor;
       font-size: (5em / 3);
       right: -35px;
       top: 0;
-      border-left: 1px solid gray;
-      padding: 5px 5px 4px 6px;
+      border: 1px solid $seeColor;
+      padding: 5px 5px 3px 6px;
     }
   }
 }
