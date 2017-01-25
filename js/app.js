@@ -64,6 +64,14 @@ $(function(){
 //get country data
    function getData(event){
 
+     var info = event.chart.getDevInfo();
+
+     console.log({
+       "latitude": info.latitude,
+       "longitude": info.longitude
+     });
+
+
 //map object var
      countryMapID = event.mapObject.id;
      countryMapName = event.mapObject.enTitle;
@@ -113,10 +121,6 @@ $(function(){
 
    function searchCountry(map) {
 
-   //    console.log(map.dataProvider.areas[0].id);
-    //  countryMapID = event.mapObject.id;
-    //  countryMapName = event.mapObject.enTitle;
-
      var $searchContainer = $('.header_form');
      var $searchForm = $searchContainer.find('form');
      var $searchInput = $searchForm.find('input[type="search"]');
@@ -127,10 +131,8 @@ $(function(){
 
      $magnGlass.on('click', function(e) {
 
-//console.log(map.dataProvider.areas[5]);
+//console.log(map.dataProvider);
 
-
-       $(searchVal).empty();
        searchVal = $searchInput.val();
 
        var landsArray = map.dataProvider.areas;
@@ -140,7 +142,8 @@ $(function(){
          var countryDataID = landsArray[i].id;
          var countryDataName = landsArray[i].enTitle;
 
-         console.log(map.dataProvider.areas[i]);
+  // path kazdego kraju ??!!
+  //       console.log(map.dataProvider.areas[i].displayObject.path);
 
          $.ajax({
            url: countryUrl + countryDataID,
@@ -151,13 +154,13 @@ $(function(){
            var countryID = response.alpha2Code;
 
            if(searchVal == countryName){
+             console.log(countryDataName);
+             console.log(countryDataID);
              console.log(countryName);
-             console.log(countryID);
-             //zoom and mark country
-             //getData();
-             countryDataID == countryID
-          //   map.zoomToSelectedObject(countryDataID);
-             map.zoomToIndexes(countryDataID);
+
+        //     countryDataID == countryID
+        // i to nr kraju. jak zrobic zeby to byl konkretny nr a nie wszystkie
+        //     console.log(map.dataProvider.areas[i].displayObject.path);
 
            }
 
