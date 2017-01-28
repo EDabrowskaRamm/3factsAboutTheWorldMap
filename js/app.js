@@ -46,6 +46,7 @@ $(function(){
 
         var $countryDataDiv = $('.map_country_data');
         $countryDataDiv.css('display', 'none');
+
       }
     }
    ]
@@ -53,9 +54,18 @@ $(function(){
   } );
 
 
-  // function clickObject( id ) {
-  //   map.clickMapObject( map.getObjectById( id ) );
-  // }
+
+  function zoom(countryDataID) {
+    var obj = map.getObjectById(countryDataID);
+
+    obj.color = "#EF5159";
+
+    if ('MapArea' == obj.objectType || 'MapData' == obj.objectType) {
+      map.clickMapObject(obj);
+    } else if ('MapImage' == obj.objectType) {
+      map.zoomToLongLat(3, obj.longitude, obj.latitude, true);
+    }
+  }
 
 
   var countryMapID;
@@ -63,14 +73,12 @@ $(function(){
 
 //get country data
    function getData(event){
-
-     var info = event.chart.getDevInfo();
-
-     console.log({
-       "latitude": info.latitude,
-       "longitude": info.longitude
-     });
-
+//this may be given as next fact: latitude and longitude;
+    //  var info = event.chart.getDevInfo();
+    //  console.log({
+    //    "latitude": info.latitude,
+    //    "longitude": info.longitude
+    //  });
 
 //map object var
      countryMapID = event.mapObject.id;
@@ -128,61 +136,39 @@ $(function(){
      var $magnGlass = $searchForm.find('.fa-search');
      var countryUrl = 'https://restcountries.eu/rest/v1/alpha/';
      var searchVal;
+     var showAlert;
 
-     $magnGlass.on('click', function(e) {
-
+     $searchForm.on('submit', function(e) {
+       e.preventDefault();
 //console.log(map.dataProvider);
 
        searchVal = $searchInput.val();
-
        var landsArray = map.dataProvider.areas;
 
        for(var i = 0, len = landsArray.length; i < len; i++) {
-
          var countryDataID = landsArray[i].id;
          var countryDataName = landsArray[i].enTitle;
+         var countryArea = landsArray[i];
 
-  // path kazdego kraju ??!!
-  //       console.log(map.dataProvider.areas[i].displayObject.path);
-
-         $.ajax({
-           url: countryUrl + countryDataID,
-           type: 'get',
-           dataType: 'json'
-         }).done(function(response){
-           var countryName = response.name;
-           var countryID = response.alpha2Code;
-
-           if(searchVal == countryName){
-             console.log(countryDataName);
-             console.log(countryDataID);
-             console.log(countryName);
-
-        //     countryDataID == countryID
-        // i to nr kraju. jak zrobic zeby to byl konkretny nr a nie wszystkie
-        //     console.log(map.dataProvider.areas[i].displayObject.path);
-
+         if(searchVal == countryDataName) {
+           console.log(searchVal);
+           console.log(countryDataID);
+           zoom(countryDataID);
+         } else {
+           if (showAlert == true){
+             alert('Please type in correct country name');
+             showAlert = false;
            }
 
-         }).fail(function(error){
-           console.log(error);
-         });
+         }
 
        }
 
      });
 
-
    }
 searchCountry(map);
-//searchCountry(event);
 
-// $('.fa-search').click(function() {
-//
-//   console.log(map.dataProvider.areas[0]);
-//   //map.zoomToSelectedObject(map.dataProvider.areas[0]);
-//   map.zoomIn();
-// })
 
 
 });
